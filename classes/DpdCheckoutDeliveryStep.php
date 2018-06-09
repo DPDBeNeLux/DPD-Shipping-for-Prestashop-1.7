@@ -18,8 +18,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+/**
+ * this is a fix from 09-06-2018
+ */
+require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS . 'DpdAuthentication.php');
+require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS . 'DpdParcelPredict.php');
+require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS . 'DpdCarrier.php');
+
 class DpdCheckoutDeliveryStep extends CheckoutDeliveryStep
 {
+	public $dpdParcelPredict;
+	public $dpdCarrier;
+
+	public function __construct(Context $context, \Symfony\Component\Translation\TranslatorInterface $translator)
+	{
+		parent::__construct($context, $translator);
+		$this->dpdParcelPredict = new DpdParcelPredict();
+		$this->dpdCarrier = new DpdCarrier();
+	}
+
 	public function render(array $extraParams = array()){
 		$templates = $this->renderTemplate(
 			$this->getTemplate(),

@@ -80,7 +80,7 @@ class OrderController extends OrderControllerCore
 			$this->context,
 			$session
 		);
-		$this->context->controller->addCSS(_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'views' . DS . 'css' . DS . 'dpdLocator.css');
+		$this->context->controller->addCSS(_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'views' . DS . 'css' . DS . '1.7dpdLocator.css');
 		$this->checkoutProcess
 			->addStep(new CheckoutPersonalInformationStep(
 				$this->context,
@@ -94,7 +94,6 @@ class OrderController extends OrderControllerCore
 				$this->makeAddressForm()
 			));
 		//own code
-		$this->context->controller->addCSS(_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'views' . DS . 'css' . DS . 'dpdLocator.css');
 		if (!$this->context->cart->isVirtualCart()) {
 			$checkoutDeliveryStep = new DpdCheckoutDeliveryStep(
 				$this->context,
