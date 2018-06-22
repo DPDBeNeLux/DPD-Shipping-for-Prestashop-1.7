@@ -189,12 +189,12 @@ class DpdLabelGenerator
 			$street = $address->address1;
 		}
 
-		if(($customer->lastname != NULL) && ($customer->firstname != NULL)){
-			$fullName = $customer->firstname .' '.  $customer->lastname;
-		}elseif($customer->lastname == NULL){
-			$fullName = $customer->firstname;
-		}elseif($customer->firstname == NULL){
-			$fullName = $customer->lastname;
+		if(($address->lastname != NULL) && ($address->firstname != NULL)){
+			$fullName = $address->firstname .' '.  $address->lastname;
+		}elseif($address->lastname == NULL){
+			$fullName = $address->firstname;
+		}elseif($address->firstname == NULL){
+			$fullName = $address->lastname;
 		}
 
 		// if it is express 12
@@ -209,7 +209,7 @@ class DpdLabelGenerator
 
 		$shipment =array( 'printOptions' => array(
 			'printerLanguage' => 'PDF'
-		,'paperFormat' => 'A4'
+			,'paperFormat' => 'A4'
 		)
 		,'order' => array(
 				'generalShipmentData' => array(

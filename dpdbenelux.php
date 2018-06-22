@@ -22,6 +22,7 @@ class DPDBenelux extends Module
 	public $dpdHelper;
 	public $dpdCarrier;
 	public $dpdParcelPredict;
+	public $dpdEncryptionManager;
 
 	private $ownControllers = array(
 		'AdminDpdLabels' => 'DPD label',
@@ -57,6 +58,10 @@ class DPDBenelux extends Module
 	{
 		require_once(_PS_MODULE_DIR_  . 'dpdbenelux' . DS . 'classes' . DS . 'DpdParcelPredict.php');
 	}
+	public function loadDpdEncryptionManager()
+	{
+		require_once(_PS_MODULE_DIR_ .  'dpdbenelux' . DS . 'classes' . DS . 'DpdEncryptionManager.php');
+	}
 
 	public function __construct()
 	{
@@ -71,6 +76,9 @@ class DPDBenelux extends Module
 		//this loads the gmaps
 		$this->loadDpdParcelLabel();
 		$this->dpdParcelPredict = new DpdParcelPredict();
+		//this loads the encryption manager
+		$this->loadDpdEncryptionManager();
+		$this->dpdEncryptionManager = new DpdEncryptionManager();
 
 		// the information about the plugin.
 		$this->version = "1.0";
@@ -146,6 +154,9 @@ class DPDBenelux extends Module
 			if($delispassword == NULL)
 			{
 				$delispassword = Configuration::get('dpdbenelux_delis_password');
+			}else
+			{
+				$delispassword = $this->dpdEncryptionManager->encrypt($delispassword);
 			}
 			$company = strval(Tools::getValue("company"));
 			$street = strval(Tools::getValue("street"));

@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+require_once(_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS . 'DpdEncryptionManager.php');
 
 class DpdClient
 {
@@ -27,6 +28,13 @@ class DpdClient
 	const DPD_AUTH_URL = 'http://dpd.com/common/service/types/Authentication/2.0';
 	const DPD_STAGING_SERVICE_URL = 'https://public-dis-stage.dpd.nl/Services/';
 	const DPD_LIVE_SERVICE_URL = 'https://public-dis.dpd.nl/Services/';
+
+	public $dpdEncryptionManager;
+
+	public function __construct()
+	{
+		$this->dpdEncryptionManager = new DpdEncryptionManager();
+	}
 
 	/**
 	 * @param $delisid
@@ -39,7 +47,7 @@ class DpdClient
 		$result = $client->getAuth(
 			array(
 				'delisId' => $delisid,
-				'password' => $delispassword,
+				'password' => $this->dpdEncryptionManager->decrypt($delispassword),
 				'messageLanguage' => 'nl_NL'
 			)
 		);
