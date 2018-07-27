@@ -32,15 +32,15 @@ class DpdParcelPredict
 		$this->DpdAuthentication = new DpdAuthentication();
 	}
 
-	public function getGeoData($postalCode, $city)
+	public function getGeoData($postalCode, $isoCode)
 	{
-		return $this->Gmaps->getGeoData($postalCode, $city);
+		return $this->Gmaps->getGeoData($postalCode, $isoCode);
 	}
 
-	public function getParcelShops($postalCode, $city){
+	public function getParcelShops($postalCode, $isoCode){
 		if($this->DpdAuthentication->isConfigured()){
 			$this->DpdAuthentication->getAccesToken();
-			$geoData = $this->Gmaps->getGeoData($postalCode, $city);
+			$geoData = $this->Gmaps->getGeoData($postalCode, $isoCode);
 			$geoData['limit'] = Configuration::get('dpdbenelux_parcel_limit');
 			return $this->dpdClient->findPacelShopsByGeoData($geoData, Configuration::get('dpdbenelux_delis_id'), Configuration::get('dpdbenelux_acces_token'));
 		}else{

@@ -67,9 +67,12 @@ class DpdCheckoutDeliveryStep extends CheckoutDeliveryStep
 
 		$address = new Address($this->context->cart->id_address_delivery);
 
+		$country = new Country($address->id_country);
+		$isoCode = $country->iso_code;
 
-		$geoData = $this->dpdParcelPredict->getGeoData($address->postcode, $address->city);
-		$parcelShops = $this->dpdParcelPredict->getParcelShops($address->postcode, $address->city);
+
+		$geoData = $this->dpdParcelPredict->getGeoData($address->postcode, $isoCode);
+		$parcelShops = $this->dpdParcelPredict->getParcelShops($address->postcode, $isoCode);
 
 		$parcelShopInfo = array(
 			'baseUri' => __PS_BASE_URI__,

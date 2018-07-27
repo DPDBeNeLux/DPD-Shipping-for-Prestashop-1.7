@@ -21,6 +21,7 @@
                     DpdInitGoogleMaps();
                     addChosen(cookieParcelId);
                     jQuery("#parcelshops").hide();
+                    jQuery(".selected-parcelshop").hide();
                 });
             }
 
