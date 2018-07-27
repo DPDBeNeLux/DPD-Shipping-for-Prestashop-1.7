@@ -343,8 +343,11 @@ class DPDBenelux extends Module
 	public function hookDisplayCarrierList($params)
 	{
 		if ($params['cart']->id_carrier == $this->dpdCarrier->getLatestCarrierByReferenceId(Configuration::get("dpdbenelux_parcelshop"))) {
-			$geoData = $this->dpdParcelPredict->getGeoData($params['address']->postcode, $params['address']->city);
-			$parcelShops = $this->dpdParcelPredict->getParcelShops($params['address']->postcode, $params['address']->city);
+			$country = new Country($params['address']->id_country);
+			$isoCode = $country->iso_code;
+
+			$geoData = $this->dpdParcelPredict->getGeoData($params['address']->postcode, $isoCode);
+			$parcelShops = $this->dpdParcelPredict->getParcelShops($params['address']->postcode, $isoCode);
 		}
 
 		$this->context->controller->addCSS(_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'views' . DS . 'css' . DS . 'dpdLocator.css');
