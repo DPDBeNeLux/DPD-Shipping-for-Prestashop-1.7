@@ -79,7 +79,8 @@ class DpdCarrier extends CarrierModule
 	public function createCarriers()
 	{
 		foreach ($this->carrierNames as $prefix => $info) {
-			if (empty(Configuration::get($this->dpdPrefix . strtolower($prefix)))) {
+			if (!Configuration::get($this->dpdPrefix . strtolower($prefix))) {
+
 				$carrier = new Carrier();
 
 				$carrier->url ='//tracking.dpd.de/parcelstatus?query=@';
@@ -94,7 +95,6 @@ class DpdCarrier extends CarrierModule
 				$carrier->id_reference = $carrier->id;
 				$carrier->update();
 				Configuration::updateValue($this->dpdPrefix . strtolower($prefix), $carrier->id);
-
 //					copy(dirname(__DIR__) . '/../logo.png', _PS_SHIP_IMG_DIR_ . '/' . (int)$carrier->id . '.jpg'); //assign carrier logo
 			}
 		}
@@ -108,7 +108,7 @@ class DpdCarrier extends CarrierModule
 
 		foreach ($this->carrierNames as $prefix => $info) {
 			$configCarrierId = Configuration::get($this->dpdPrefix . $prefix);
-
+			
 			$carrierId = $this->getLatestCarrierByReferenceId($configCarrierId, false);
 			if ($info['type'] == $accountType) {
 				$this->unDeleteCarrier($carrierId);

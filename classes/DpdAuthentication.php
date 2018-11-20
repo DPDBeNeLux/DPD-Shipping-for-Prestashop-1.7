@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-require_once (_PS_MODULE_DIR_  . 'dpdbenelux' . DS . 'classes' . DS . 'DpdClient.php');
+require_once (_PS_MODULE_DIR_  . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdClient.php');
 
 class DpdAuthentication
 {

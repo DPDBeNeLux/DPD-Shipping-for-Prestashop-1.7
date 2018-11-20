@@ -17,8 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-require _PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS . 'DpdParcelPredict.php';
-require _PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS . 'DpdCarrier.php';
+require _PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdParcelPredict.php';
+require _PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdCarrier.php';
 
 class DpdShippingList
 {

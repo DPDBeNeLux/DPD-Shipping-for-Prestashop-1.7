@@ -69,8 +69,7 @@ class DpdHelper
 
 	public function installDB()
 	{
-			$file = dirname(__FILE__) . DS .'install' . DS . 'install.sql';
-			$query = file_get_contents($file);
+			$query = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'install' . DIRECTORY_SEPARATOR . 'install.sql');
 
 			$query = preg_replace('/_PREFIX_/', _DB_PREFIX_, $query);
 

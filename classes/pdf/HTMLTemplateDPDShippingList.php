@@ -41,12 +41,12 @@ class HTMLTemplateDPDShippingList extends HTMLTemplate
 
 	public function getHeader(){
 		$this->assignCommonHeaderData();
-		return $this->smarty->fetch(_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'pdf' . DS . 'header.tpl');
+		return $this->smarty->fetch(_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'pdf' . DIRECTORY_SEPARATOR . 'header.tpl');
 	}
 
 	public function getContent()
 	{
-		return $this->smarty->fetch(_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'pdf' . DS . 'content.tpl');
+		return $this->smarty->fetch(_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'pdf' . DIRECTORY_SEPARATOR . 'content.tpl');
 	}
 
 	public function assignHookData($object)
@@ -67,7 +67,7 @@ class HTMLTemplateDPDShippingList extends HTMLTemplate
 
 	public function getLogo()
 	{
-		return _PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'logo.png';
+		return _PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'logo.png';
 	}
 
 	public function getFooter()
@@ -78,7 +78,7 @@ class HTMLTemplateDPDShippingList extends HTMLTemplate
 
 	public function getPagination()
 	{
-		return $this->smarty->fetch(_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'pdf' . DS . 'pagination.tpl');
+		return $this->smarty->fetch(_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'pdf' . DIRECTORY_SEPARATOR . 'pagination.tpl');
 	}
 
 }

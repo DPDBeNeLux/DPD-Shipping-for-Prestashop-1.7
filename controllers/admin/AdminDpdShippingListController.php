@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-require _PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS . 'DpdShippingList.php';
+require _PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdShippingList.php';
 class AdminDpdShippingListController extends ModuleAdminController
 {
 	public $dpdShippingList;
@@ -31,7 +31,7 @@ class AdminDpdShippingListController extends ModuleAdminController
 	public function initContent()
 	{
 		parent::initContent();
-		require(_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS .'pdf' . DS . 'HTMLTemplateDPDShippingList.php');
+		require(_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR .'pdf' . DIRECTORY_SEPARATOR . 'HTMLTemplateDPDShippingList.php');
 		$orderIds = Tools::getValue("ids_order");
 		$data = $this->dpdShippingList->generateData($orderIds);
 		$pdf = new PDF(array($data), 'DPDShippingList', Context::getContext()->smarty, 'L');

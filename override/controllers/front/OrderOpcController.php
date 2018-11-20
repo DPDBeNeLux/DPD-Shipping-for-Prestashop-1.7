@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS . 'DpdCarrier.php');
+require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdCarrier.php');
 class OrderOpcController extends OrderOpcControllerCore
 {
 	public $dpdCarrier;
@@ -31,7 +31,7 @@ class OrderOpcController extends OrderOpcControllerCore
 	protected function _assignCarrier()
 	{
 		if (!$this->isLogged) {
-			$this->context->controller->addCSS(_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'views' . DS . 'css' . DS . 'dpdLocator.css');
+			$this->context->controller->addCSS(_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'dpdLocator.css');
 		}
 
 		$carriers = $this->context->cart->simulateCarriersOutput(null, true);

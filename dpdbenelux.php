@@ -42,25 +42,27 @@ class DPDBenelux extends Module
 
 	public function loadHelper()
 	{
-		require_once(_PS_MODULE_DIR_  . 'dpdbenelux' . DS . 'helper.php');
+		require_once(_PS_MODULE_DIR_  . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'helper.php');
 	}
 
 	public function loadDpdCarrier()
 	{
-		require_once(_PS_MODULE_DIR_  . 'dpdbenelux' . DS . 'classes' . DS . 'DpdCarrier.php');
+		require_once(_PS_MODULE_DIR_  . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdCarrier.php');
 	}
 
 	public function loadDpdPredictLabel()
 	{
-		require_once(_PS_MODULE_DIR_  . 'dpdbenelux' . DS . 'classes' . DS . 'DpdLabelGenerator.php');
+		require_once(_PS_MODULE_DIR_  . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdLabelGenerator.php');
 	}
+
 	public function loadDpdParcelLabel()
 	{
-		require_once(_PS_MODULE_DIR_  . 'dpdbenelux' . DS . 'classes' . DS . 'DpdParcelPredict.php');
+		require_once(_PS_MODULE_DIR_  . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdParcelPredict.php');
 	}
+
 	public function loadDpdEncryptionManager()
 	{
-		require_once(_PS_MODULE_DIR_ .  'dpdbenelux' . DS . 'classes' . DS . 'DpdEncryptionManager.php');
+		require_once(_PS_MODULE_DIR_ .  'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdEncryptionManager.php');
 	}
 
 	public function __construct()
@@ -71,14 +73,18 @@ class DPDBenelux extends Module
 		// this loads the DpdCarrier
 		$this->loadDpdCarrier();
 		$this->dpdCarrier = new DpdCarrier();
+
 		//this loads the DpdLabelGenerator
 		$this->loadDpdPredictLabel();
+		
 		//this loads the gmaps
 		$this->loadDpdParcelLabel();
 		$this->dpdParcelPredict = new DpdParcelPredict();
+		
 		//this loads the encryption manager
 		$this->loadDpdEncryptionManager();
 		$this->dpdEncryptionManager = new DpdEncryptionManager();
+		
 
 		// the information about the plugin.
 		$this->version = "1.0";
@@ -87,8 +93,14 @@ class DPDBenelux extends Module
 		$this->author = "DPD Nederland B.V.";
 		$this->tab = 'shipping_logistics';
 		$this->limited_countries = array('be', 'lu', 'nl');
+
+        $this->ps_versions_compliancy = [
+            'min' => '1.6',
+            'max' => _PS_VERSION_
+        ];
 		$this->need_instance = 1;
 		$this->bootstrap = true;
+		
 		parent::__construct();
 	}
 	/**
@@ -96,7 +108,6 @@ class DPDBenelux extends Module
 	 */
 	public function install()
 	{
-
 		if(!$this->dpdHelper->checkIfExtensionIsLoaded('soap')) {
 			//TODO create a log that soap is not installed
 			return false;
@@ -350,7 +361,7 @@ class DPDBenelux extends Module
 			$parcelShops = $this->dpdParcelPredict->getParcelShops($params['address']->postcode, $isoCode);
 		}
 
-		$this->context->controller->addCSS(_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'views' . DS . 'css' . DS . 'dpdLocator.css');
+		$this->context->controller->addCSS(_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'dpdLocator.css');
 		$this->context->smarty->assign(
 			array(
 				'parcelshopId' => $this->dpdCarrier->getLatestCarrierByReferenceId(Configuration::get("dpdbenelux_parcelshop")),
