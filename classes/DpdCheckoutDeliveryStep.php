@@ -21,9 +21,9 @@
 /**
  * this is a fix from 09-06-2018
  */
-require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS . 'DpdAuthentication.php');
-require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS . 'DpdParcelPredict.php');
-require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS . 'DpdCarrier.php');
+require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdAuthentication.php');
+require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdParcelPredict.php');
+require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdCarrier.php');
 
 class DpdCheckoutDeliveryStep extends CheckoutDeliveryStep
 {
@@ -86,7 +86,7 @@ class DpdCheckoutDeliveryStep extends CheckoutDeliveryStep
 		);
 		$this->context->smarty->assign($parcelShopInfo);
 
-		$templates .= $this->renderTemplate(_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'views' . DS . 'templates' . DS . '1.7' . DS . '_dpdLocator1.7.tpl');
+		$templates .= $this->renderTemplate(_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . '1.7' . DIRECTORY_SEPARATOR . '_dpdLocator1.7.tpl');
 
 		file_put_contents('log.txt', print_r($this->context->cookie, true));
 		return $templates;

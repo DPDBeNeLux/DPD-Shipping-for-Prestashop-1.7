@@ -17,9 +17,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS . 'DpdCarrier.php');
-require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS . 'DpdDeliveryOptionsFinder.php');
-require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'classes' . DS . 'DpdCheckoutDeliveryStep.php');
+require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdCarrier.php');
+require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdDeliveryOptionsFinder.php');
+require_once (_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'DpdCheckoutDeliveryStep.php');
 
 use PrestaShop\PrestaShop\Adapter\Product\PriceFormatter;
 
@@ -80,7 +80,7 @@ class OrderController extends OrderControllerCore
 			$this->context,
 			$session
 		);
-		$this->context->controller->addCSS(_PS_MODULE_DIR_ . 'dpdbenelux' . DS . 'views' . DS . 'css' . DS . '1.7dpdLocator.css');
+		$this->context->controller->addCSS(_PS_MODULE_DIR_ . 'dpdbenelux' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . '1.7dpdLocator.css');
 		$this->checkoutProcess
 			->addStep(new CheckoutPersonalInformationStep(
 				$this->context,
