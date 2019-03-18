@@ -115,11 +115,8 @@ class DpdClient
 		{
 			return  self::DPD_LIVE_SERVICE_URL . $serviceUrl;
 		}
-		else
-		{
-			return self::DPD_STAGING_SERVICE_URL . $serviceUrl;
-		}
 
+        return self::DPD_STAGING_SERVICE_URL . $serviceUrl;
 	}
 
 	public function findPacelShopsByGeoData($parameters, $delisId, $accessToken)
@@ -150,8 +147,13 @@ class DpdClient
 		$tempFile = $cacheDir . $md5Key . '.wsdl';
 		if(!file_exists($tempFile))
 		{
-			$wsdl = file_get_contents($url );
-			file_put_contents($tempFile, $wsdl);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
+            $wsdl = curl_exec($ch);
+            curl_close($ch);
+            file_put_contents($tempFile, $wsdl);
 		}
 		$client = new SoapClient($tempFile);
 

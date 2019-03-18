@@ -65,6 +65,7 @@ class OrderController extends OrderControllerCore
 			$this->objectPresenter,
 			new PriceFormatter()
 		);
+
 		$session = new CheckoutSession(
 			$this->context,
 			$deliveryOptionsFinder

@@ -53,8 +53,7 @@ class DpdLabelGenerator
 			$res = $zip->open($zipfile, ZipArchive::CREATE);
 		}
 		foreach ($orderIds as $orderId) {
-			if ( $this->dpdParcelPredict->checkIfDpdSending($orderId)
-			) {
+			if ( $this->dpdParcelPredict->checkIfDpdSending($orderId)) {
 				$result = $this->getLabelOutOfDb($orderId, $return);
 					if ($result) {
 						$pdf = $result[0]['label'];
@@ -70,9 +69,12 @@ class DpdLabelGenerator
 								$pdf = $label->parcellabelsPDF;
 								foreach ($labelNumbers as $labelNumber)
 								{
-									// adds the weight to every parcel, because every weight is the same anyway. because the weight is devided by the number of parcels.
-									$labelNumber->weight = $shipmentInfo['order']['parcels'][0]['weight'];
-								}
+                                    if(empty($labelNumber->weight)) {
+                                        continue;
+                                    }
+                                    // adds the weight to every parcel, because every weight is the same anyway. because the weight is devided by the number of parcels.
+                                    $labelNumber->weight = $shipmentInfo['order']['parcels'][0]['weight'];
+                                }
 								$this->dpdClient->storeOrders($mpsId, $labelNumbers, $orderId, $pdf, $return);
 								$tempOrder = new Order($orderId);
 								$tempOrder->setWsShippingNumber($mpsId);
@@ -221,6 +223,7 @@ class DpdLabelGenerator
 					,'country' => Configuration::get('dpdbenelux_country')
 					,'zipCode' => Configuration::get('dpdbenelux_postalcode')
 					,'city' => Configuration::get('dpdbenelux_place')
+					,'phone' => Configuration::get('PS_SHOP_PHONE')
 					)
 				,'recipient' => array(
 						'name1' =>  $fullName
@@ -228,6 +231,7 @@ class DpdLabelGenerator
 					,'country' => $country->iso_code
 					,'zipCode' => $address->postcode // No spaces in zipCode!
 					,'city' => $address->city
+					,'phone' => $phone
 					)
 				)
 			,'productAndServiceData' => $serviceData
