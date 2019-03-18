@@ -87,7 +87,7 @@ class DPDBenelux extends Module
 		
 
 		// the information about the plugin.
-		$this->version = "1.0";
+		$this->version = "1.2";
 		$this->name = "dpdbenelux";
 		$this->displayName = $this->l("DPDBenelux");
 		$this->author = "DPD Nederland B.V.";

@@ -37,7 +37,8 @@ class DpdParcelPredict
 		return $this->Gmaps->getGeoData($postalCode, $isoCode);
 	}
 
-	public function getParcelShops($postalCode, $isoCode){
+	public function getParcelShops($postalCode, $isoCode)
+    {
 		if($this->DpdAuthentication->isConfigured()){
 			$this->DpdAuthentication->getAccesToken();
 			$geoData = $this->Gmaps->getGeoData($postalCode, $isoCode);
@@ -52,8 +53,13 @@ class DpdParcelPredict
 
 	public function getParcelShopId($orderId)
 	{
-		$sql = "SELECT parcelshop_id FROM " . _DB_PREFIX_ . "parcelshop WHERE order_id = " . pSQL($orderId);
-		return Db::getInstance()->executeS($sql)[0]['parcelshop_id'];
+		$query = Db::getInstance()->getValue("SELECT parcelshop_id FROM " . _DB_PREFIX_ . "parcelshop WHERE order_id = " . pSQL($orderId));
+
+		if (count($query) === 0) {
+		    return null;
+        }
+
+		return $query;
 	}
 
 	public function checkIfDpdSending($orderId)
@@ -90,7 +96,8 @@ class DpdParcelPredict
 
 	}
 
-	public function checkIfParcelCarrier($orderId){
+	public function checkIfParcelCarrier($orderId)
+    {
 		$parcelShopId = $this->getParcelShopId($orderId);
 		$dpdParcelshopCarrierId = $this->checkIfParcelSending( $orderId);
 

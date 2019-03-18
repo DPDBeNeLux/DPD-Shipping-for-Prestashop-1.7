@@ -24,18 +24,9 @@
 use PrestaShop\PrestaShop\Adapter\Product\PriceFormatter;
 class DpdDeliveryOptionsFinder extends DeliveryOptionsFinder
 {
-	public function __construct(Context $context,
-								\Symfony\Component\Translation\TranslatorInterface $translator,
-								\PrestaShop\PrestaShop\Adapter\ObjectPresenter $objectPresenter,
-								PriceFormatter $priceFormatter
-	)
-	{
-		parent::__construct($context, $translator, $objectPresenter, $priceFormatter);
-		$this->dpdCarrier = new DpdCarrier();
-	}
-
 	public function getDeliveryOptions()
 	{
+        $this->dpdCarrier = new DpdCarrier();
 		$carriers_available = parent::getDeliveryOptions();
 
 		$saturdayCarrierId = $this->dpdCarrier->getLatestCarrierByReferenceId(Configuration::get('dpdbenelux_saturday'));
